@@ -1,0 +1,43 @@
+1. Prompt 1: Kỹ thuật Zero-shot
+Hãy đóng vai nhân viên chăm sóc khách hàng của một cửa hàng đồ công nghệ. Nhiệm vụ của bạn là phân loại danh sách 5 phản hồi trên Facebook dưới đây vào đúng 1 trong 3 nhãn sau:
+- **Tích cực**: Khách hàng hài lòng, khen ngợi.
+- **Tiêu cực**: Khách hàng phàn nàn, không hài lòng.
+- **Yêu cầu hỗ trợ**: Khách hàng cần giải quyết một vấn đề cụ thể.
+Danh sách phản hồi cần phân loại:
+1. "Sản phẩm đẹp, giao hàng nhanh, rất hài lòng."
+2. "Tôi đã đặt hàng 5 ngày nhưng chưa nhận được."
+3. "Tai nghe không kết nối được Bluetooth."
+4. "Nhân viên tư vấn rất nhiệt tình."
+5. "Tôi muốn hoàn tiền vì sản phẩm bị lỗi."
+Yêu cầu đầu ra: Trình bày kết quả dưới dạng bảng Markdown gồm 4 cột: `STT` | `Phản hồi` | `Nhãn phân loại` | `Lý do` (giải thích ngắn gọn dưới 15 từ). Không thêm lời dẫn.
+2. Prompt 2: Kỹ thuật Few-shot
+Hãy đóng vai nhân viên chăm sóc khách hàng của một cửa hàng đồ công nghệ. Nhiệm vụ của bạn là phân loại phản hồi của khách hàng trên Facebook dựa trên 3 quy tắc sau:
+- **Tích cực**: Khách hàng hài lòng, khen ngợi.
+- **Tiêu cực**: Khách hàng phàn nàn, không hài lòng (chỉ bày tỏ sự bực bội, chưa đưa ra yêu cầu xử lý trực tiếp).
+- **Yêu cầu hỗ trợ**: Khách hàng gặp sự cố kỹ thuật hoặc đưa ra yêu cầu giải quyết một vấn đề cụ thể (kiểm tra đơn, bảo hành, hoàn tiền).
+Dưới đây là 3 ví dụ mẫu về cách phân loại chuẩn xác:
+- Phản hồi: "Bàn phím gõ rất êm, đóng gói cẩn thận." -> Nhãn: Tích cực | Lý do: Khách hàng khen ngợi chất lượng sản phẩm và đóng gói.
+- Phản hồi: "Shop làm ăn quá chậm chạp, thất vọng thật sự." -> Nhãn: Tiêu cực | Lý do: Khách hàng bày tỏ sự phàn nàn, không hài lòng chung.
+- Phản hồi: "Màn hình laptop bị sọc xanh, shop hướng dẫn mình cách bảo hành với." -> Nhãn: Yêu cầu hỗ trợ | Lý do: Khách hàng gặp lỗi kỹ thuật và cần hướng dẫn giải quyết.
+Áp dụng đúng logic trên, hãy phân loại 5 phản hồi sau:
+1. "Sản phẩm đẹp, giao hàng nhanh, rất hài lòng."
+2. "Tôi đã đặt hàng 5 ngày nhưng chưa nhận được."
+3. "Tai nghe không kết nối được Bluetooth."
+4. "Nhân viên tư vấn rất nhiệt tình."
+5. "Tôi muốn hoàn tiền vì sản phẩm bị lỗi."
+Yêu cầu đầu ra: Trình bày kết quả dưới dạng bảng Markdown gồm 4 cột: `STT` | `Phản hồi` | `Nhãn phân loại` | `Lý do` (giải thích ngắn gọn dưới 15 từ). Không thêm lời dẫn.
+3. Kết quả phân loại (Áp dụng theo chuẩn Few-shot)
+| STT | Phản hồi                                           | Nhãn phân loại   | Lý do                                                             |
++-----+----------------------------------------------------+------------------+-------------------------------------------------------------------+
+| 1   | "Sản phẩm đẹp, giao hàng nhanh, rất hài lòng."     | Tích cực         | Khách hàng khen ngợi sản phẩm và tốc độ giao hàng.                |
+| 2   | "Tôi đã đặt hàng 5 ngày nhưng chưa nhận được."     | Yêu cầu hỗ trợ   | Khách hàng phản ánh chậm trễ và cần kiểm tra tình trạng đơn hàng. |
+| 3   | "Tai nghe không kết nối được Bluetooth."           | Yêu cầu hỗ trợ   | Khách hàng gặp sự cố kỹ thuật cần được hướng dẫn khắc phục.        |
+| 4   | "Nhân viên tư vấn rất nhiệt tình."                 | Tích cực         | Khách hàng hài lòng và khen ngợi thái độ phục vụ của nhân viên.   |
+| 5   | "Tôi muốn hoàn tiền vì sản phẩm bị lỗi."           | Yêu cầu hỗ trợ   | Khách hàng đưa ra yêu cầu giải quyết thủ tục hoàn tiền cụ thể.    |
+4. So sánh ngắn gọn kết quả giữa Zero-shot và Few-shot
+Về độ chính xác:
+Zero-shot: Dễ bị nhầm lẫn ở các câu mang sắc thái kép (như câu số 2 và số 5). AI thường có xu hướng gán nhãn Tiêu cực vì thấy các từ khóa như "chưa nhận được" hay "bị lỗi", bỏ qua nhu cầu xử lý nghiệp vụ phía sau.
+Few-shot: Phân loại chính xác hơn nhờ các ví dụ mẫu đã "dạy" cho AI biết ranh giới giữa việc than phiền đơn thuần (Tiêu cực) và gặp sự cố cần xử lý (Yêu cầu hỗ trợ).
+Về tính nhất quán:
+Zero-shot: Độ dài phần giải thích ở cột Lý do và cách dùng từ có thể thay đổi thiếu đồng đều qua mỗi lần chạy.
+Few-shot: Giữ được cấu trúc câu giải thích ngắn gọn, đồng nhất và bám sát tiêu chuẩn vận hành của cửa hàng nhờ học theo khuôn mẫu định sẵn.
